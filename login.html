@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+   <head>
+      <meta charset="utf-8">
+      <title>Glowing Inputs Login Form UI</title>
+      <link rel="stylesheet" href="style.css">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+   </head>
+   <body>
+      <div class="menu-bar">
+         <div class="logo">MedTracker</div>
+         <ul>
+            <li><a href="home.html">HOME</a></li>
+            <li><a href="register.html">REGISTER</a></li>
+            <li><a href="about.html">ABOUT</a></li>
+            <li><a href="contact.html">CONTACT</a></li>
+            <li><a href="login.html">LOGOUT</a></li>
+         </ul>
+      </div>
+      <div class="login-form">
+         <div class="text">
+            LOGIN
+         </div>
+         
+            <form id="adminLoginForm">
+               <div class="field">
+                  <div class="fas fa-envelope"></div>
+                  <input type="text" placeholder="Email" id="email" required>
+               </div>
+               <div class="field">
+                  <div class="fas fa-lock"></div>
+                  <input type="password" placeholder="Password" id="password" required>
+               </div>
+             <!-- <div class="field">
+                  <div class="fas fa-user"></div>
+                  <select class="form-input" name="user_type" id="user_type">
+                     <option value="patients">Patients</option>
+                     <option value="admin">Admin</option>
+                     <option value="doctor">Doctor</option>
+                  </select>
+               </div>-->
+               <button>LOGIN</button>
+               <div class="link">
+                  Not a member?
+                  <a href="register.html">Signup now</a>
+               </div>
+               <div class="link">
+                  <a href="forgot.html">Forgot Password?</a>
+              </div>
+         </form>
+      </div>
+      <!-- Scripts and other content -->
+      <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-database-compat.js"></script>
+    <script src="js/loginapp.js"></script>
+   </body>
+</html>

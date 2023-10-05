@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Firebase Email Authentication</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="wrapper">
+        <h1 class="main-heading">Sign in</h1>
+        <p class="sub-text">Sign in using your email and password.</p>
+        <div class="message-wrapper" id="messageDiv">
+            <h6 class="message"></h6>
+        </div>
+        <div class="form-wrapper">
+            <form id="loginForm">
+                <div class="input-field">
+                    <label>Email</label>
+                    <input type="email" placeholder="Email" name="email">
+                </div>
+                <div class="input-field">
+                    <label>Password</label>
+                    <input type="password" placeholder="Password" name="password">
+                </div>
+                <button class="main-button" type="submit">Sign in</button>
+            </form>
+        </div>
+        <div class="bottom-message">
+            <h5>New here? <a href="sign-up.html">Sign up</a></h5>
+            <h5>Forgot Password? <a href="reset.html">Reset here</a></h5>
+        </div>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-auth.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
