@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="add_clinic.css">
+</head>
+<body>
+    <div class="menu-bar">
+        <div class="logo">MedTracker</div>
+        <ul>
+           <li><a href="home.html">HOME</a></li>
+           <li><a href="register.html">REGISTER</a></li>
+           <li><a href="about.html">ABOUT</a></li>
+           <li><a href="contact.html">CONTACT</a></li>
+           <!--<li><a href="login.html">LOGOUT</a></li>-->
+           <li><button id="logoutButton">Logout</button></li>
+        </ul>
+     </div>
+    <div class="container">
+        <h2>Add Department</h2>
+        <form id="departmentForm" class="form">
+            <div class="form-group">
+                <label for="clinic">CLINIC:</label>
+                <select id="clinic" name="clinic" required>
+                    <option value="" disabled selected>SELECT</option>
+                    <!-- Clinic options will be dynamically populated here -->
+                </select>
+            </div>
+            <div class="form-group">
+                <input type="text" id="departmentName" name="departmentName" placeholder="Department Name" required>
+            </div>
+            <button type="submit" class="btn">Add Department</button>
+        </form>
+    </div>
+    <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-database-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-storage-compat.js"></script>
+    <script src="department.js"></script>
+</body>
+</html>
