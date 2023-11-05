@@ -19,7 +19,7 @@ body {
   text-align: center;
   align-items: center;
   justify-content: center;
-  background-image: url('pic.jpg'); /* Replace 'path/to/your-image.jpg' with the actual path to your image file */
+  background-image: url('images/hero_1.jpg'); /* Replace 'path/to/your-image.jpg' with the actual path to your image file */
   background-size: cover; /* This ensures the image covers the entire background */
   background-repeat: no-repeat; /* Prevents the image from repeating */
   background-attachment: fixed; /* Keeps the image fixed in place */
@@ -52,7 +52,7 @@ form .field{
 .field .fas{
   height: 50px;
   width: 60px;
-  color: #a73232;
+  color: #0b0a0a;
   font-size: 20px;
   line-height: 50px;
   border: 1px solid #c9c3c3;
@@ -76,7 +76,7 @@ input:focus{
   color: #339933;
   box-shadow: 0 0 5px rgba(0,255,0,.2),
               inset 0 0 5px rgba(0,255,0,.1);
-  background: linear-gradient(#333933,#222922);
+  background: linear-gradient(#ffffff,#ffffff);
   animation: glow .8s ease-out infinite alternate;
 }
 @keyframes glow {

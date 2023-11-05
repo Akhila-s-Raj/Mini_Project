@@ -4,17 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
-    <link rel="stylesheet" href="dashboardstyle.css">
+    <link rel="stylesheet" href="css/dashboardstyle.css">
 </head>
 <body>
     <div class="menu-bar">
         <div class="logo">MedTracker</div>
         <ul>
            <li><a href="home.html">HOME</a></li>
-           <li><a href="register.html">REGISTER</a></li>
+           <!--<li><a href="register.html">REGISTER</a></li>-->
            <li><a href="about.html">ABOUT</a></li>
            <li><a href="contact.html">CONTACT</a></li>
-           <li><a href="login.html">LOGOUT</a></li>
+         <li>  <button id="logoutButton">Logout</button></li>
         </ul>
      </div>
     <div class="container">
@@ -23,28 +23,24 @@
             <ul>
                 <li><a href="user_list.html">VIEW USERS</a></li>
                 <li><a href="#view-doctors">ADD HOSPITAL</a></li>
-               <!-- <li><a href="#view-patients">View Patients</a></li>
-                <li><a href="#view-caregivers">View Caregivers</a></li>-->
+                <!-- <li><a href="#view-patients">View Patients</a></li>
+                <li><a href="#view-caregivers">View Caregivers</a></li> -->
                 <li><a href="#manage-feedback">MANAGE FEEDBACK</a></li>
             </ul>
         </div>
         <div class="content">
-   <!--  <section id="add-hospital">
-                <h2>Add Hospital</h2>
-                 Hospital Form 
-                <form id="hospitalForm">
-                    <input type="text" placeholder="Hospital Name" required>
-                    <input type="text" placeholder="Location" required>
-                    <button type="submit">Add Hospital</button>
-                </form>
-            </section>-->
             <section id="view-doctors">
                 <h1><b>MED TRACKER</b><h1>
                     <h2> <i>Personal Medication Companion></i></h2>
             </section>
-          
         </div>
     </div>
-    <script src="dashboard.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-database-compat.js"></script>
+    <script src="js/dashboard.js"></script>
+
+
+
 </body>
 </html>

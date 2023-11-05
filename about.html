@@ -35,21 +35,21 @@
           <form action="#" method="post">
             <input type="text" class="form-control" placeholder="Search keyword and hit enter...">
           </form>
-        </div>-->
+        </div>
       </div>
 
       <div class="container">
         <div class="d-flex align-items-center justify-content-between">
           <div class="logo">
             <div class="site-logo">
-              <a href="index.html" class="js-logo-clone">Pharma</a>
+              <a href="index.html" class="js-logo-clone">MedTracker</a>
             </div>
           </div>
           <div class="main-nav d-none d-lg-block">
             <nav class="site-navigation text-right text-md-center" role="navigation">
               <ul class="site-menu js-clone-nav d-none d-lg-block">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="login.html">LOGIN</a></li>
+                <li><a href="home.html">Home</a></li>
+               <!-- <li><a href="login.html">LOGIN</a></li>-->
                <!-- <li class="has-children">
                   <a href="#">Dropdown</a>
                   <ul class="dropdown">
@@ -68,10 +68,11 @@
                     
                   </ul>
                 </li>-->
-                <li><a href="register.html">REGISTER</a></li>
-                <li class="active"><a href="about.html">About</a></li>
+                <!--<li><a href="#">APPOINTMENTS</a></li>-->
+                <!--<li class="active"><a href="about.html">About</a></li>-->
                 <li><a href="contact.html">CONTACT</a></li>
-                <li><a href="logout.html">LOGOUT</a></li>
+                <!--<li><a href="login.html">LOGOUT</a></li>-->
+                <li><button id="logoutButton">Logout</button></li>
 
               </ul>
             </nav>
@@ -328,16 +329,24 @@
       </div>
     </footer>
   </div>
+  <script>
+    const logoutButton = document.getElementById('logoutButton');
 
-  <script src="js/jquery-3.3.1.min.js"></script>
-  <script src="js/jquery-ui.js"></script>
-  <script src="js/popper.min.js"></script>
-  <script src="js/bootstrap.min.js"></script>
-  <script src="js/owl.carousel.min.js"></script>
-  <script src="js/jquery.magnific-popup.min.js"></script>
+    // Handle logout when the logout button is clicked
+    logoutButton.addEventListener('click', () => {
+        // Redirect to the login page after successful logout
+        window.location.href = 'login.html';
+    });
+
+    // Prevent navigating back to the previous page after logout
+    window.addEventListener('beforeunload', (event) => {
+        event.returnValue = 'You are logged out. Are you sure you want to leave?';
+    });
+</script>
+
+ 
   <script src="js/aos.js"></script>
 
-  <script src="js/main.js"></script>
 
 </body>
 
