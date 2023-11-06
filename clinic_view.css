@@ -1,0 +1,67 @@
+/* Styles for the menu bar */
+.menu-bar {
+    background-color: #4cacaf;
+    overflow: hidden;
+}
+
+.menu-bar .logo {
+    font-size: 24px;
+    color: white;
+    padding: 10px 20px;
+    float: left;
+}
+
+.menu-bar ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    float: right;
+}
+
+.menu-bar li {
+    display: inline;
+    margin-right: 20px;
+}
+
+.menu-bar a {
+    text-decoration: none;
+    color: white;
+}
+
+/* Container styles */
+.container {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Table styles */
+#clinicTable {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#clinicTable th,
+#clinicTable td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: left;
+}
+
+#clinicTable th {
+    background-color: #4cafaa;
+    color: white;
+}
+
+/* Edit button styles */
+button {
+    background-color: #4cacaf;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #4cacaf;
+}

@@ -13,6 +13,7 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth();
 const database = firebase.database();
+
 // Get references to the form fields
 const clinicField = document.getElementById("clinic");
 const departmentNameField = document.getElementById("departmentName");
@@ -42,9 +43,13 @@ departmentForm.addEventListener("submit", function (e) {
     // Generate a unique department ID (e.g., using a timestamp)
     const departmentId = Date.now().toString();
 
-    // Create a data object
+    // Get the selected clinic name
+    const selectedClinicName = clinicField.options[clinicField.selectedIndex].textContent;
+
+    // Create a data object with clinic name
     const data = {
         departmentName: departmentName,
+        clinicName: selectedClinicName
     };
 
     // Reference to the "departments" table in Firebase Realtime Database

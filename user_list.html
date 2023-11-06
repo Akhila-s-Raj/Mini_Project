@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>View Registered Users</title>
     <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/userview.css">
+    <link rel="stylesheet" href="userview.css">
     <style>
        table, th, td {
   border: 1px solid black;
@@ -20,7 +20,21 @@ th, td {
   padding-left: 30px;
   padding-right: 40px;
 }
-  
+
+  .action-button {
+    background-color: rgb(1, 39, 52);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin: 5px;
+    cursor: pointer;
+  }
+
+  /* Ensure buttons are displayed in the same line */
+  .action-button {
+    display: inline-block;
+  }
+
 
     </style>
 </head>
@@ -32,8 +46,7 @@ th, td {
            <li><a href="register.html">REGISTER</a></li>
            <li><a href="about.html">ABOUT</a></li>
            <li><a href="contact.html">CONTACT</a></li>
-           <!--<li><a href="login.html">LOGOUT</a></li>-->
-           <li><button id="logoutButton">Logout</button></li>
+           <li><a href="login.html">LOGOUT</a></li>
         </ul>
      </div>
     
@@ -48,27 +61,13 @@ th, td {
                     <th>User Type</th>
                     <th>Mobile Number</th>
                     <th>Gender</th>
+                    <th>Status</th>
+                    <th>Enable/Disable</th>
                 </tr>
             </thead>
             <tbody></tbody>
         </table>
     </div>
-    <script>
-        const logoutButton = document.getElementById('logoutButton');
-
-// Handle logout when the logout button is clicked
-logoutButton.addEventListener('click', () => {
-    // Redirect to the login page after successful logout
-    window.location.href = 'login.html';
-    // Use pushState to replace the current history entry with the login page
-    window.history.pushState({}, '', 'login.html');
-});
-
-// Prevent navigating back to the previous page after logout
-window.addEventListener('beforeunload', (event) => {
-    event.returnValue = 'You are logged out. Are you sure you want to leave?';
-});
-    </script>
 
     <!-- JS -->
     <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-app-compat.js"></script>
