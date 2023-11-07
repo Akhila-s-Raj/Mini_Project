@@ -19,48 +19,8 @@ const storage = firebase.storage();
 // Get references to the form fields
 const specialityField = document.getElementById("speciality");
 const licenseNumberField = document.getElementById("licenseNumber");
-const clinicField = document.getElementById("clinic");
-const departmentField = document.getElementById("department");
 const photoField = document.getElementById("photo");
 const doctorForm = document.getElementById("doctorForm");
-
-// Populate clinic options from Firebase
-const clinicRef = database.ref("clinic");
-clinicRef.on("value", (snapshot) => {
-  clinicField.innerHTML = ""; // Clear previous options
-  const clinics = snapshot.val();
-  // Create a default "SELECT" option
-  const defaultOption = document.createElement("option");
-  defaultOption.value = "";
-  defaultOption.textContent = "SELECT";
-  clinicField.appendChild(defaultOption);
-  for (const key in clinics) {
-    const clinicName = clinics[key].clinicName;
-    const option = document.createElement("option");
-    option.value = key;
-    option.textContent = clinicName;
-    clinicField.appendChild(option);
-  }
-});
-
-// Populate department options from Firebase
-const departmentRef = database.ref("departments"); // Change "department" to "departments"
-departmentRef.on("value", (snapshot) => {
-  departmentField.innerHTML = ""; // Clear previous options
-  const departments = snapshot.val();
-  // Create a default "SELECT" option
-  const defaultOption = document.createElement("option");
-  defaultOption.value = "";
-  defaultOption.textContent = "SELECT";
-  departmentField.appendChild(defaultOption);
-  for (const key in departments) {
-    const departmentName = departments[key].departmentName;
-    const option = document.createElement("option");
-    option.value = key;
-    option.textContent = departmentName;
-    departmentField.appendChild(option);
-  }
-});
 
 // Handle form submission
 doctorForm.addEventListener("submit", function (e) {
@@ -75,12 +35,10 @@ doctorForm.addEventListener("submit", function (e) {
 
   const speciality = specialityField.value;
   const licenseNumber = licenseNumberField.value;
-  const clinic = clinicField.value;
-  const department = departmentField.value;
   const photo = photoField.files[0]; // Get the selected file
 
-  if (!clinic || !department) {
-    window.alert("Please select a clinic and a department.");
+  if (!speciality || !licenseNumber || !photo) {
+    window.alert("Please fill in all required fields.");
     return;
   }
 
@@ -88,8 +46,6 @@ doctorForm.addEventListener("submit", function (e) {
   const data = {
     speciality: speciality,
     licenseNumber: licenseNumber,
-    clinic: clinic,
-    department: department,
     email: user.email, // Add the user's email to the data
   };
 

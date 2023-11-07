@@ -99,3 +99,7 @@ label[for="department"] {
   font-size: inherit; /* Inherit font size */
   color: inherit; /* Inherit color */
 }
+
+#department {
+  color: green;
+}
