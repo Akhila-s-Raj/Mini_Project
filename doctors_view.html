@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Doctors</title>
+    <link rel="stylesheet" href="css/dashboardstyle.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+        }
+
+       /* .menu-bar {
+            background-color: #3498db;
+            color: #070707;
+            padding: 10px 0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 2;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .menu-bar .logo {
+            margin-left: 20px;
+            color: white;
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+        .menu-bar ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .menu-bar li {
+            display: inline;
+            margin: 0 20px;
+        }
+
+        .menu-bar a {
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            font-size: 16px;
+        }*/
+
+        .container {
+            margin-top: 50px; /* Adjust as needed */
+            
+        }
+
+        .content {
+            margin: 20px;
+        }
+
+        .container1 {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-top: 10%;
+            margin-left: 35%;
+            width: 35%;
+            height: 45%;
+            border: #a5c4ec;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        button {
+            background-color: #4caf50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        /* Sidebar styling */
+        .sidebar {
+            width: 250px;
+            height: 100%;
+            background-color:  #a5c4ec;
+            color: #fff;
+            padding: 20px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sidebar h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .sidebar ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .sidebar ul li {
+            margin-bottom: 10px;
+        }
+
+        .sidebar ul li a {
+            color: #fff;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="menu-bar">
+        <div class="logo">MedTracker</div>
+        <ul>
+            <li><a href="dashboard.html" id="logoutButton">HOME</a></li>
+        </ul>
+    </div>
+    <div class="sidebar">
+        <h1>Admin Panel</h1>
+        <ul>
+            <li><a href="user_list.html">VIEW USERS</a></li>
+           
+             <li><a href="doctors_view.html">DOCTORS UNDER EACH HOSPITAL</a></li>
+             <li><a href="add_hospital.html">ADD HOSPITAL</a></li>
+             <li><a href="hospital_view.html">HOSPITAL VIEW</a></li>
+             
+        </ul>
+    </div>
+    <div class="container">
+        <div class="content">
+            <div class="container1">
+                <h1>View Doctors</h1>
+                <form id="viewDoctorsForm">
+                    <div class="form-group">
+                        <label for="selectHospital">Select Hospital:</label>
+                        <select id="selectHospital" name="selectHospital">
+                            <!-- Populate with hospitals dynamically from Firebase -->
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="selectDepartment">Select Department:</label>
+                        <select id="selectDepartment" name="selectDepartment">
+                            <!-- Populate with departments dynamically based on selected hospital -->
+                        </select>
+                    </div>
+                    <button type="button" onclick="console.log('Button Clicked!'); loadDoctors()">Load Doctors</button>
+                </form>
+                <div id="doctorsList">
+                    <!-- Doctors details will be displayed here dynamically -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-database-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-storage-compat.js"></script>
+    <script src="doctors_view.js"></script>
+</body>
+</html>

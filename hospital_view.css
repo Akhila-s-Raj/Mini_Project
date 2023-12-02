@@ -1,0 +1,41 @@
+/* Add this CSS in a style tag or in a separate CSS file */
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+}
+
+h1 {
+    text-align: center;
+}
+
+#clinic-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+#clinic-table th, #clinic-table td {
+    padding: 10px;
+    text-align: left;
+}
+
+#clinic-table th {
+    background-color: #f2f2f2;
+}
+
+#clinic-table td button {
+    cursor: pointer;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    border-radius: 4px;
+}
+
+#clinic-table td button:hover {
+    background-color: #45a049;
+}

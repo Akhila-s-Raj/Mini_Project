@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- ... (existing meta tags and links) ... -->
+    <!-- Include Firebase scripts here -->
+    <!-- ... -->
+
+    <title>User Profile</title>
+    <link rel="stylesheet" href="doctor_profile.css">
+   
+    <style>
+        /* Add CSS for the radio buttons to be displayed inline */
+        .gender-radio {
+            display: flex;
+            margin-right: 1px; /* Adjust the margin as needed */
+        }
+    </style>
+</head>
+<body>
+    <header>
+        
+    </header>
+    <div class="menu-bar">
+        <div class="logo">MedTracker</div>
+        <ul>
+           <li><a href="home.html">HOME</a></li>
+           <li><a href="register.html">REGISTER</a></li>
+           <li><a href="about.html">ABOUT</a></li>
+           <li><a href="contact.html">CONTACT</a></li>
+           <!--<li><a href="login.html">LOGOUT</a></li>-->
+           <li><a href="login.html" id="logoutLink">LOGOUT</a></li>
+        </ul>
+     </div>
+    <div class="container">
+        <div class="user-profile">
+            <h2 class="form-title">User Profile</h2>
+            <form  id="user-profile-form" class="user-profile-form">
+                <div class="form-group">
+                    <label for="name">Name:</label>
+                    <input type="text" class="form-input" name="name" id="name" placeholder="Your Name" disabled>
+                </div>
+
+               <!-- <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" class="form-input" name="email" id="email" placeholder="Your Email" disabled>
+                </div>-->
+                
+
+                <div class "form-group">
+                    <label for="user_type">User Type:</label>
+                    <select class="form-input" name="user_type" id="user_type" disabled>
+                        <option value="doctor">Doctor</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="mobile_number">Mobile Number:</label>
+                    <input type="text" class="form-input" name="mobile_number" id="mobile_number" placeholder="Mobile Number" disabled>
+                </div>
+
+                <div class="form-group">
+                    <label>Gender:</label>
+                    <div class="gender-radio">
+                        <input type="radio" name="gender" id="gender_male" value="male" disabled>
+                        <label for="gender_male">Male</label>
+                    </div>
+
+                    <div class="gender-radio">
+                        <input type="radio" name="gender" id="gender_female" value="female" disabled>
+                        <label for="gender_female">Female</label>
+                    </div>
+
+                    <div class="gender-radio">
+                        <input type="radio" name="gender" id="gender_other" value="other" disabled>
+                        <label for="gender_other">Other</label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <button type="button" id="edit-button" class="form-submit">Edit</button>
+                </div>
+
+                <div class="form-group">
+                    <button type="button" id="update-button" class="form-submit" style="background-color: blue; display: none;">Update</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-database-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-storage-compat.js"></script>
+    <script src="js/doctor_profile.js"></script>
+    
+</body>
+</html>

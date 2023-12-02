@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+   <head>
+      <meta charset="utf-8">
+      <title>Feedback Form</title>
+      <link rel="stylesheet" href="feedback.css">
+   </head>
+   <body>
+      <div class="menu-bar">
+         <div class="logo">MedTracker</div>
+         <ul>
+             <li><a href="home.html">HOME</a></li>
+            
+             <li><a href="about.html">ABOUT</a></li>
+             <li><a href="contact.html">CONTACT</a></li>
+             <!--<li><a href="login.html">LOGOUT</a></li>-->
+             <li><a href="login.html" id="logoutButton">LOGOUT</a></li>
+         </ul>
+     </div>
+     <div class="container">
+      <div class="text">
+         FEEDBACK FORM
+      </div>
+      
+         
+         <form method="get" id="feedbackForm">
+            <div class="field">
+               <textarea placeholder="Enter your feedback" id="feedbackMessage" required></textarea>
+            </div>
+            <button type="submit">SUBMIT</button>
+         </form>
+      </div></div>
+      <!-- Scripts and other content -->
+      <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-app-compat.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-auth-compat.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-database-compat.js"></script>
+      <script src="feedback.js"></script>
+   </body>
+</html>

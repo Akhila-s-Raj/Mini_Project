@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Clinic</title>
+    <link rel="stylesheet" href="edit_hospital.css">
+   
+</head>
+<body>
+    <div class="wrapper">
+        <div class="menu-bar">
+            <div class="logo">MedTracker</div>
+            <ul>
+                <li><a href="dashboard.html" id="logoutButton">HOME</a></li>
+            </ul>
+        </div>
+
+        <div class="sidebar">
+            <h1>Menu</h1>
+            <ul>
+                <li><a href="user_list.html">VIEW USERS</a></li>
+           
+                <li><a href="doctors_view.html">DOCTORS UNDER EACH HOSPITAL</a></li>
+                <li><a href="add_hospital.html">ADD HOSPITAL</a></li>
+                <li><a href="hospital_view.html">HOSPITAL VIEW</a></li>
+            </ul>
+        </div>
+
+        <div class="container">
+            <div class="content">
+                <div class="container1">
+                    <h1>Edit Clinic</h1>
+                    <form id="edit-clinic-form">
+                        <div class="form-group">
+                            <label for="editClinicName">Clinic Name:</label>
+                            <input type="text" id="editClinicName" name="clinicName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="editLicenseNumber">License Number:</label>
+                            <input type="text" id="editLicenseNumber" name="licenseNumber" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="editPlace">Place:</label>
+                            <input type="text" id="editPlace" name="place" required>
+                        </div>
+                        <div id="editDepartmentsContainer">
+                            <!-- Department inputs will be dynamically added here -->
+                        </div>
+                        <button type="button" onclick="addEditDepartment()">Add Department</button>
+                        <button type="submit">Update Clinic</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-database-compat.js"></script>
+    <script src="edit_hospital.js"></script>
+</body>
+</html>

@@ -13,6 +13,28 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 const database = firebase.database();
 
+const logoutLink = document.getElementById("logoutLink");
+if (logoutLink) {
+  logoutLink.addEventListener("click", () => {
+    // Sign out the user
+    firebase.auth().signOut().then(() => {
+      // Redirect to the login page after successful logout
+      window.location.href = 'login.html';
+      // Clear the browser's history to prevent going back
+      clearBrowserHistory();
+    }).catch((error) => {
+      console.error('Error logging out:', error);
+    });
+  });
+}
+
+// Function to clear the browser's history
+function clearBrowserHistory() {
+  if (typeof window.history.pushState === 'function') {
+    window.history.pushState({}, 'Login', 'login.html');
+  }
+}
+
 const departmentForm = document.getElementById("departmentForm");
 const departmentSelect = document.getElementById("departmentSelect");
 const departmentNameField = document.getElementById("departmentName");

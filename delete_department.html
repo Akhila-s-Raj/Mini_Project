@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="delete_department.css">
+</head>
+<body>
+    <div class="menu-bar">
+        <div class="logo">MedTracker</div>
+        <ul>
+            <li><a href="home.html">HOME</a></li>
+            <li><a href="register.html">REGISTER</a></li>
+            <li><a href="about.html">ABOUT</a></li>
+            <li><a href="contact.html">CONTACT</a></li>
+            <li><button id="logoutButton">Logout</button></li>
+        </ul>
+    </div>
+    <div class="container">
+        <h2>Clinics and Departments</h2>
+        <form id="clinicDepartmentForm">
+            <div class="form-group">
+                <label for="clinic">Select Clinic:</label>
+                <select id="clinic" name="clinic" required>
+                    <option value="" disabled selected>SELECT</option>
+                    <!-- Clinic options will be dynamically populated here -->
+                </select>
+            </div>
+            <button type="submit" class="btn">View Departments</button>
+        </form>
+        <table id="clinicDepartmentTable">
+            <!-- Clinic departments will be dynamically populated here -->
+        </table>
+    </div>
+    <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-database-compat.js"></script>
+    <script src="delete_departmet.js"></script>
+</body>
+</html>

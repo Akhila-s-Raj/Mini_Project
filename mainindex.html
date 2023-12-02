@@ -1,0 +1,38 @@
+<!-- indexmain.html -->
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+   <meta charset="utf-8">
+   <title>Set Alarm</title>
+   <link rel="stylesheet" href="style.css">
+</head>
+<body>
+   <div class="menu-bar">
+      <!-- Add menu bar if needed -->
+   </div>
+   <div class="alarm-form">
+      <div class="text">
+         SET ALARM
+      </div>
+      <form id="alarmForm">
+         <div class="field">
+            <div class="fas fa-envelope"></div>
+            <input type="text" placeholder="Message" id="message" required>
+         </div>
+         <div class="field">
+            <div class="fas fa-clock"></div>
+            <input type="time" id="alarmTime" required>
+         </div>
+         <button>SET ALARM</button>
+      </form>
+   </div>
+   
+         <button>SET ALARM</button>
+      </form>
+   </div>
+   <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-app-compat.js"></script>
+   <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-auth-compat.js"></script>
+   <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-database-compat.js"></script>
+   <script src="alarmapp.js"></script> <!-- Create a new JS file for this functionality -->
+</body>
+</html>

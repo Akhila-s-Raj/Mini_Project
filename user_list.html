@@ -6,54 +6,69 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>View Registered Users</title>
-    <link rel="stylesheet" href="css/style.css">
+   
     <link rel="stylesheet" href="userview.css">
+    <link rel="stylesheet" href="sidebar.css"> <!-- New link for sidebar styling -->
     <style>
-       table, th, td {
-  border: 1px solid black;
-  border-collapse: collapse;
-  margin-top: 500px;
-}
-th, td {
-  padding-top: 10px;
-  padding-bottom: 20px;
-  padding-left: 30px;
-  padding-right: 40px;
-}
+        table, th, td {
+            border: 2px solid black;
+            border-collapse: collapse;
+            margin-top: 100px;
+            margin-left: 30%;
+            margin-right: 40px;
+            margin-bottom: 40px;
+        }
+        th, td {
+            padding-top: 10px;
+            padding-bottom: 10px;
+            padding-left: 10px;
+            padding-right: 10px;
+        }
 
-  .action-button {
-    background-color: rgb(1, 39, 52);
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    margin: 5px;
-    cursor: pointer;
-  }
+        .action-button {
+            background-color: rgb(136, 202, 220);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 5px;
+            cursor: pointer;
+        }
 
-  /* Ensure buttons are displayed in the same line */
-  .action-button {
-    display: inline-block;
-  }
+        .action-button {
+            display: inline-block;
+        }
 
-
+        .active-button {
+            background-color: rgb(157, 232, 158);
+        }
+        
     </style>
 </head>
 <body>
     <div class="menu-bar">
         <div class="logo">MedTracker</div>
         <ul>
-           <li><a href="home.html">HOME</a></li>
-           <li><a href="register.html">REGISTER</a></li>
-           <li><a href="about.html">ABOUT</a></li>
-           <li><a href="contact.html">CONTACT</a></li>
-           <li><a href="login.html">LOGOUT</a></li>
+            <li><a href="dashboard.html">HOME</a></li>
+          
         </ul>
-     </div>
-    
+    </div>
+   
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <h1>Menu</h1>
+        <ul>
+            
+            <li><a href="user_list.html">VIEW USERS</a></li>
+           
+             <li><a href="doctors_view.html">DOCTORS UNDER EACH HOSPITAL</a></li>
+             <li><a href="add_hospital.html">ADD HOSPITAL</a></li>
+             <li><a href="hospital_view.html">HOSPITAL VIEW</a></li>
+        </ul>
+    </div>
 
     <div class="container">
-        <h2>Registered Users</h2>
-        <table id="userTable" columns>
+        <h2>REGISTERED DOCTORS</h2>
+        <table id="userTable" columns >
             <thead>
                 <tr>
                     <th>Name</th>

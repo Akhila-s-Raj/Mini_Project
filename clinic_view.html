@@ -7,27 +7,16 @@
     <div class="menu-bar">
         <div class="logo">MedTracker</div>
         <ul>
-            <li><a href="home.html">HOME</a></li>
-            <li><a href="register.html">REGISTER</a></li>
-            <li><a href="about.html">ABOUT</a></li>
-            <li><a href="contact.html">CONTACT</a></li>
-            <!--<li><a href="login.html">LOGOUT</a></li>-->
-            <li><button id="logoutButton">Logout</button></li>
+            <li><a href="dashboard.html">HOME</a></li>
+           
+            <li><a href="login.html" id="logoutLink">LOGOUT</a></li>
         </ul>
     </div>
     <div class="container">
-        <h2>Clinics and Departments</h2>
+        <h2>Hospital and Departments</h2>
         <table id="clinicTable">
-            <thead>
-                <tr>
-                    <th>Clinic Name</th>
-                    <th>Departments</th>
-                    <th>Edit</th>
-                </tr>
-            </thead>
-            <tbody id="clinicList">
-                <!-- Clinics and departments will be dynamically populated here -->
-            </tbody>
+            
+            <!-- Clinics and departments will be dynamically populated here -->
         </table>
     </div>
     <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-app-compat.js"></script>

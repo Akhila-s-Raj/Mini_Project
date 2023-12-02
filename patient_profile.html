@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- ... (existing meta tags and links) ... -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Profile</title>
+    <link rel="stylesheet" href="patient_profile.css"> <!-- Include your stylesheets as needed -->
+    <!-- Additional styles or links if required -->
+</head>
+<body>
+
+    <div class="menu-bar">
+        <div class="logo">MedTracker</div>
+        <ul>
+            <li><a href="patienthome.html">HOME</a></li>
+          <!--   <li><a href="patient_profile.html">PROFILE</a></li>  
+           <li><a href="logout.html">LOGOUT</a></li>-->
+        </ul>
+    </div>
+
+    <div class="container">
+        <div class="user-profile">
+            <h2 class="form-title">Patient Profile</h2>
+            <form id="patient-profile-form" class="patient-profile-form">
+                <!-- Display patient details in form structure -->
+                <div class="form-group">
+                    <label for="name">Name:</label>
+                    <input type="text" class="form-input" name="name" id="name" disabled>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" class="form-input" name="email" id="email" disabled>
+                </div>
+
+                <div class="form-group">
+                    <label for="mobile_number">Mobile Number:</label>
+                    <input type="text" class="form-input" name="mobile_number" id="mobile_number" disabled>
+                </div>
+
+                <div class="form-group">
+                    <label for="gender">Gender:</label>
+                    <input type="text" class="form-input" name="gender" id="gender" disabled>
+                </div>
+
+                <div class="form-group">
+                    <label for="patient_id">Patient ID:</label>
+                    <input type="text" class="form-input" name="patient_id" id="patient_id" disabled>
+                </div>
+
+                <div class="form-group">
+                    <label for="user_type">User Type:</label>
+                    <input type="text" class="form-input" name="user_type" id="user_type" disabled>
+                </div>
+                <!-- ... (existing form structure) ... -->
+
+<div class="form-group">
+    <button type="button" id="edit-profile-button" class="form-submit">Edit Profile</button>
+</div>
+
+                
+            </form>
+        </div>
+    </div>
+
+    <!-- JS -->
+    <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-database-compat.js"></script>
+    <script src="patient_profile.js"></script>
+</body>
+</html>

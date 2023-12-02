@@ -1,0 +1,84 @@
+body {
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-image: url('images/medicine1.jpg');
+}
+
+.container {
+  max-width: 1000px;
+  margin-top: 180px;
+  margin-left: 15%;
+  padding: 20px;
+  border: 1px solid #3498db; /* Change border color to blue */
+  border-radius: 5px;
+  background-color: #ffffff; /* Change background color to a light gray */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  margin-bottom: 8px; /* Slightly reduce the margin for labels */
+}
+
+input,
+select {
+  margin-bottom: 15px; /* Increase the margin for input and select elements */
+  padding: 10px;
+  box-sizing: border-box; /* Include padding and border in the element's total width and height */
+}
+
+input[type="submit"] {
+  background-color: #2ecc71; /* Change button color to green */
+  color: white;
+  cursor: pointer;
+}
+
+input[type="submit"]:hover {
+  background-color: #27ae60; /* Change button hover color to a slightly darker green */
+}
+
+
+.menu-bar {
+  background-color: white;
+  width: 100%;
+  height: 10%;
+  text-align: center;
+  padding: 10px 0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  top: 0;
+  z-index: 2;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.menu-bar .logo {
+  margin-left: 20px;
+  color: black;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.menu-bar ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.menu-bar li {
+  display: inline;
+  margin: 0 20px;
+}
+
+.menu-bar a {
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
+  font-size: 16px;
+}

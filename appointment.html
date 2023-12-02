@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schedule Appointment</title>
+    <link rel="stylesheet" href="appointment.css">
+    <!-- Add any additional stylesheets here -->
+</head>
+<body>
+    <div class="menu-bar">
+        <div class="logo">MedTracker</div>
+        <ul>
+            <li><a href="login.html" id="logoutButton">LOGOUT</a></li>
+        </ul>
+    </div>
+    
+    <div class="content">
+        <div class="container1">
+            <h1>Schedule Appointment</h1>
+            <form id="appointmentForm">
+                <div class="form-group">
+                    <label for="selectHospital">Select Hospital:</label>
+                    <select id="selectHospital" name="selectHospital">
+                        <!-- Populate with hospitals dynamically from Firebase -->
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="selectDepartment">Select Department:</label>
+                    <select id="selectDepartment" name="selectDepartment">
+                        <!-- Populate with departments dynamically based on selected hospital -->
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="selectDoctor">Select Doctor:</label>
+                    <select id="selectDoctor" name="selectDoctor">
+                        <!-- Populate with doctors dynamically based on selected hospital and department -->
+                    </select>
+                </div>
+                <!-- Add this code inside the form in your HTML -->
+<div class="form-group">
+    <label for="scheduleDay">Schedule Day:</label>
+    <input type="date" id="scheduleDay" name="scheduleDay" required>
+</div>
+<div class="form-group">
+    <label for="scheduleTime">Available Appointment Times:</label>
+    <!-- Display available appointment times here -->
+    <div id="appointmentTimesContainer"></div>
+</div>
+<button type="submit">Submit</button>
+
+                <!--<button type="button" onclick="scheduleAppointment()">Schedule Appointment</button>-->
+            </form>
+        </div>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-database-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-storage-compat.js"></script>
+    <script src="appointment.js"></script>
+</body>
+</html>

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment for Appointment</title>
+   
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-image: url('images/bg_2.jpg');
+        }
+
+        #paymentContainer {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 30%;
+            height: 30%;
+            margin-left: 50%;
+            width: 300200px;
+            margin-right: 0px;
+            justify-content: center;
+        }
+
+        #paymentForm {
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 16px;
+            box-sizing: border-box; /* To include padding in width calculation */
+        }
+
+        button {
+            padding: 20px;
+            font-size: 18px;
+            display: ce;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+        
+.menu-bar {
+    background-color: white;
+    width: 100%;
+    height: 10%;
+    text-align: center;
+    padding: 10px 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    top: 0;
+    z-index: 2;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .menu-bar .logo {
+    margin-left: 20px;
+    color: black;
+    font-weight: bold;
+    font-size: 20px;
+  }
+  
+  .menu-bar ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .menu-bar li {
+    display: inline;
+    margin: 0 20px;
+  }
+  
+  .menu-bar a {
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+    font-size: 16px;
+  }
+    </style>
+</head>
+<body>
+    <div class="menu-bar">
+        <div class="logo">MedTracker</div>
+        <ul>
+           <!--<li><a href="home.html">HOME</a></li>
+           <li><a href="register.html">REGISTER</a></li>
+           <li><a href="about.html">ABOUT</a></li>
+           <li><a href="contact.html">CONTACT</a></li>-->
+           <li><a href="login.html" id="logoutButton">LOGOUT</a></li>
+         <!--<li>  <button id="logoutButton">Logout</button></li>-->
+        </ul>
+     </div>
+    <div id="paymentContainer">
+        <div id="paymentForm">
+            <h2>Appointment Payment</h2>
+            <form id="appointmentPaymentForm">
+               
+
+                <!--<button type="button" onclick="processPayment()">Pay Now</button>-->
+               <!-- <button type="button" id="payNowButton">Pay Now</button>-->
+                <button id="paymentButton">Proceed to Payment</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function processPayment() {
+            // In a real-world scenario, you would integrate with a payment gateway here.
+            // This is just a placeholder for demonstration purposes.
+            alert('Payment processed successfully!');
+        }
+    </script>
+    <script src="https://checkout.razorpay.com/v1/checkout.js" data-key="rzp_test_yC5Yi8Kgoil1r5"></script>
+    <script src="razorpay.js"></script>
+  
+
+</body>
+</html>
