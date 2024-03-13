@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" type="text/css" href="add_clinic.css">
+</head>
+
+<body>
+    <div class="menu-bar">
+        <div class="logo">MedTracker</div>
+        <ul>
+            <li><a href="firestore_home.html">HOME</a></li>
+        </ul>
+    </div>
+    <div class="container">
+        <h2>Add Doctor's Personal Details</h2>
+        <form id="doctorForm" class="form">
+            <div class="form-group">
+                <label for="speciality">Speciality:</label>
+                <input type="text" id="speciality" name="speciality" placeholder="Speciality" required>
+            </div>
+            <div class="form-group">
+                <label for="licenseNumber">License Number:</label>
+                <input type="text" id="licenseNumber" name="licenseNumber" placeholder="License Number" required>
+            </div>
+            <div class="form-group">
+                <label for="photo">Photo:</label>
+                <input type="file" id="photo" name="photo" accept="image/*" required>
+            </div>
+            <div class="form-group">
+                <label for="hospital">Hospital:</label>
+                <select id="hospital" name="hospital" required>
+                    <!-- Options will be dynamically added from Firebase -->
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="department">Department:</label>
+                <select id="department" name="department" required>
+                    <!-- Options will be dynamically added based on the selected hospital -->
+                    <option value="" disabled selected>Select Department</option>
+                </select>
+            </div>
+
+            <!-- ... (previous HTML code) -->
+
+            <div class="form-group">
+                <label for="prevHospital">Previously Worked Hospital:</label>
+                <input type="text" id="prevHospital" name="prevHospital" placeholder="Previously Worked Hospital">
+            </div>
+
+            <div class="form-group">
+                <label for="certificate">Certificate (PDF):</label>
+                <input type="file" id="certificate" name="certificate" accept=".pdf" required>
+            </div>
+
+            <div class="form-group">
+                <label for="experience">Years of Experience:</label>
+                <input type="number" id="experience" name="experience" placeholder="Years of Experience" required>
+            </div>
+
+
+
+            <!-- ... (previous HTML code) -->
+
+            <!-- ... (previous HTML code) -->
+
+<!-- ... (previous HTML code) -->
+
+<!-- Add this to your HTML form for appointment days -->
+<div class="form-group">
+    <label>Appointment Days:</label>
+    <input type="checkbox" name="appointmentDays" value="Sunday"> Sunday
+    <input type="checkbox" name="appointmentDays" value="Monday"> Monday
+    <input type="checkbox" name="appointmentDays" value="Tuesday"> Tuesday
+    <input type="checkbox" name="appointmentDays" value="Wednesday">Wednesday
+    <input type="checkbox" name="appointmentDays" value="Thursday">Thursday
+    <input type="checkbox" name="appointmentDays" value="Friday"> Friday
+    <input type="checkbox" name="appointmentDays" value="Saturday">Saturday
+    <!-- Repeat for other days -->
+</div>
+
+
+<!-- ... (previous HTML code) -->
+
+
+<div class="form-group">
+    <label for="startTime">Start Time:</label>
+    <select id="startTime" name="startTime" required>
+        <!-- Add options for different appointment start times (e.g., 6 AM, 7 AM, etc.) -->
+        <option value="01:00">1:00 AM</option>
+        <option value="02:00">2:00 AM</option>
+        <option value="03:00">3:00 AM</option>
+        <option value="04:00">4:00 AM</option>
+        <option value="05:00">5:00 AM</option>
+        <option value="06:00">6:00 AM</option>
+        <option value="07:00">7:00 AM</option>
+        <option value="08:00">8:00 AM</option>
+        <option value="09:00">9:00 AM</option>
+        <option value="10:00">10:00 AM</option>
+        <option value="11:00">11:00 AM</option>
+        <option value="12:00">12:00 AM</option>
+        <option value="01:00">1:00 PM</option>
+        <option value="02:00">2:00 PM</option>
+        <option value="03:00">3:00 PM</option>
+        <option value="04:00">4:00 PM</option>
+        <option value="05:00">5:00 PM</option>
+        <option value="06:00">6:00 PM</option>
+        <option value="07:00">7:00 PM</option>
+        <option value="08:00">8:00 PM</option>
+        <option value="09:00">9:00 PM</option>
+        <option value="10:00">10:00 PM</option>
+        <option value="11:00">11:00 PM</option>
+        <option value="12:00">12:00 PM</option>
+        <!-- Add more options as needed -->
+    </select>
+</div>
+
+<div class="form-group">
+    <label for="endTime">End Time:</label>
+    <select id="endTime" name="endTime" required>
+        <!-- Add options for different appointment end times (e.g., 12 PM, 1 PM, etc.) -->
+        <option value="01:00">1:00 AM</option>
+        <option value="02:00">2:00 AM</option>
+        <option value="03:00">3:00 AM</option>
+        <option value="04:00">4:00 AM</option>
+        <option value="05:00">5:00 AM</option>
+        <option value="06:00">6:00 AM</option>
+        <option value="07:00">7:00 AM</option>
+        <option value="08:00">8:00 AM</option>
+        <option value="09:00">9:00 AM</option>
+        <option value="10:00">10:00 AM</option>
+        <option value="11:00">11:00 AM</option>
+        <option value="12:00">12:00 AM</option>
+        <option value="01:00">1:00 PM</option>
+        <option value="02:00">2:00 PM</option>
+        <option value="03:00">3:00 PM</option>
+        <option value="04:00">4:00 PM</option>
+        <option value="05:00">5:00 PM</option>
+        <option value="06:00">6:00 PM</option>
+        <option value="07:00">7:00 PM</option>
+        <option value="08:00">8:00 PM</option>
+        <option value="09:00">9:00 PM</option>
+        <option value="10:00">10:00 PM</option>
+        <option value="11:00">11:00 PM</option>
+        <option value="12:00">12:00 PM</option>
+        <!-- Add more options as needed -->
+    </select>
+</div>
+
+<!-- ... (previous HTML code) -->
+
+
+            <button type="submit" class="btn">Add Doctor</button>
+        </form>
+    </div>
+    <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-database-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-storage-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-firestore-compat.js"></script>
+    <script src="firestore_doctors_details1.js"></script>
+</body>
+
+</html>
