@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Previous Prescription</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="firestore_previousPrescription.css">
+</head>
+
+<body>
+
+    <div class="menu-bar">
+        <div class="logo">MedTracker</div>
+        <div class="user-session">
+            <div id="currentUserEmail"></div>
+            <div id="currentUserNameAndId"></div>
+        </div>
+        <ul>
+            <li><a href="firestore_home.html">HOME</a></li>
+            <li><a href="firestore_addPrescription.html?patientId=<%=patientId%>">Add Prescription</a></li>
+
+            <li><a href="#">Previous Prescription</a></li> <!-- This link is for the current page -->
+        </ul>
+    </div>
+
+    <!-- Prescription Details Table -->
+    <div class="prescription-details">
+        <h2 id="patientIdHeading">Prescription Details of Patient ID: </h2>
+        <table id="prescriptionTable">
+            <thead>
+                <tr>
+                    <th>Prescription ID</th>
+                    <th>Diagnosis</th>
+                    <th>Medications</th>
+                   <!-- <th>Patient ID</th>-->
+                    <th>Symptoms</th>
+                    <th>Timestamp</th>
+                </tr>
+            </thead>
+            <tbody id="prescriptionTableBody"></tbody>
+        </table>
+    </div>
+
+    <!-- Include Firebase and JavaScript file -->
+    <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-firestore-compat.js"></script>
+    <script src="firestore_previousPrescription.js" defer></script>
+
+</body>
+
+</html>

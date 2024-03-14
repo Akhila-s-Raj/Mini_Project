@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>MEDTRACKER &mdash; Patient Details</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="firestore_patientDetails.css">
+  <!-- Add your existing CSS and font links here -->
+</head>
+
+<body>
+
+  <div class="menu-bar">
+    <div class="logo">MedTracker</div>
+    <div class="user-session">
+      <div id="currentUserEmail"></div>
+      <div id="currentUserNameAndId"></div>
+    </div>
+    <ul>
+      <li><a href="firestore_home.html">HOME</a></li>
+    </ul>
+  </div>
+
+  <div class="patient-details">
+    <h2>Patient Details</h2>
+    <div id="patientDetailsContent">
+      <!-- Patient details will be dynamically inserted here -->
+    </div>
+    <h2>Medication History</h2>
+    <table id="medicationHistoryTable">
+      <!-- Medication history table will be dynamically inserted here -->
+    </table>
+
+    <!-- Add Prescription button -->
+    <div id="addPrescriptionContainer">
+      <button id="addPrescriptionBtn">Add Prescription</button>
+    </div>
+  </div>
+
+  <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-firestore-compat.js"></script>
+  <script src="firestore_patientDetails.js"></script>
+</body>
+
+</html>

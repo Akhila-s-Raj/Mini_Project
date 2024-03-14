@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Doctors</title>
+    <link rel="stylesheet" href="firestore_viewDoctors.css">
+</head>
+
+<body>
+    <div class="menu-bar">
+        <div class="logo">MedTracker</div>
+        <ul>
+            <li><a href="dashboard.html">HOME</a></li>
+        </ul>
+    </div>
+
+    <div class="container">
+        <h1>View Doctors</h1>
+
+        <div class="filter-section">
+            <label for="hospital">Select Hospital:</label>
+            <select id="hospital" onchange="loadDepartments()">
+                <!-- Options will be dynamically added from Firebase -->
+            </select>
+
+            <label for="department">Select Department:</label>
+            <select id="department" onchange="loadDoctors()">
+                <!-- Options will be dynamically added based on the selected hospital -->
+                <option value="" disabled selected>Select Department</option>
+            </select>
+        </div>
+
+        <div class="doctors-list">
+            <!-- Doctors list will be dynamically added here -->
+        </div>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-database-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-firestore-compat.js"></script>
+    <script src="firestore_viewDoctors.js"></script>
+</body>
+
+</html>
