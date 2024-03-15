@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>MEDTRACKER &mdash; Add Prescription</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="firestore_addPrescription.css">
+    <!-- Add your existing CSS and font links here -->
+
+    <!-- Select2 CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+</head>
+
+<body>
+
+    <div class="menu-bar">
+        <div class="logo">MedTracker</div>
+        <div class="user-session">
+            <div id="currentUserEmail"></div>
+            <div id="currentUserNameAndId"></div>
+        </div>
+        <ul>
+            <li><a href="firestore_home.html">HOME</a></li>
+            <li><a href="firestore_previousPrescription.html" id="previousPrescriptionLink">Previous Prescription</a></li>
+        </ul>
+    </div>
+
+    <div class="add-prescription-form">
+        <h2>Add Prescription</h2>
+
+        <form id="prescriptionForm">
+            <label for="patientId">Patient ID:</label>
+            <input type="text" id="patientId" name="patientId" readonly required>
+
+            <label for="symptoms">Symptoms:</label>
+            <textarea id="symptoms" name="symptoms" rows="4" placeholder="Enter symptoms"></textarea>
+
+            <label for="diagnosis">Diagnosis:</label>
+            <textarea id="diagnosis" name="diagnosis" rows="4" placeholder="Enter diagnosis"></textarea>
+
+            <div id="medicationsContainer"></div>
+
+            <button id="addMedicineButton" type="button">Add Medicine</button>
+            
+            <br>
+
+            <button type="submit">Submit Prescription</button>
+        </form>
+    </div>
+
+    <!-- Select2 JS and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-firestore-compat.js"></script>
+    <script src="firestore_addPrescription.js" defer></script>
+
+</body>
+
+</html>

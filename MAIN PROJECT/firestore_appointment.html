@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>MEDTRACKER &mdash; Appointment</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="firestore_appointment.css">
+  <!-- Add your existing CSS  and font links here -->
+</head>
+
+<body>
+
+  <div class="menu-bar">
+    <div class="logo">MedTracker</div>
+    <div class="user-session">
+      <div id="currentUserEmail"></div>
+      <div id="currentUserNameAndId"></div>
+    </div>
+    <ul>
+      <li><a href="firestore_home.html">HOME</a></li>
+    </ul>
+  </div>
+
+  <div class="appointment-table">
+    <h2>Appointment Details</h2>
+    
+    <!-- Search bar -->
+   <!-- Search bar -->
+<div class="search-bar">
+  <label for="searchInput">Search Patient ID:</label>
+  <div class="search-input">
+    <input type="text" id="searchInput" placeholder="Enter Patient ID">
+    <button onclick="searchAppointments()">Search</button>
+  </div>
+</div>
+
+    
+    <table id="appointmentTable">
+      <thead>
+        <tr>
+          <th>Appointment ID</th>
+          <th>Patient ID</th>
+          <th>Patient Name</th>
+          <th>Appointment Date</th>
+          <th>Appointment Time</th>
+          <th>Action</th> <!-- Add a new column for the button -->
+          <!-- Add more columns as needed -->
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Appointment details will be dynamically inserted here -->
+      </tbody>
+    </table>
+  </div>
+
+  <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-firestore-compat.js"></script>
+  <script src="firestore_appointment.js"></script>
+</body>
+
+</html>
