@@ -12,11 +12,11 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
 
-  String? _validateEmail(String? value) {
+  String? validateEmail(String? value) {
     if (value == null || value.isEmpty) {
       return 'Please enter your email';
     } else if (!EmailValidator.validate(value)) {
@@ -25,19 +25,20 @@ class _LoginPageState extends State<LoginPage> {
     return null;
   }
 
-  String? _validatePassword(String? value) {
+  String? validatePassword(String? value) {
     if (value == null || value.isEmpty) {
       return 'Please enter your password';
     }
     return null;
   }
 
-  void _login() async {
-    if (_formKey.currentState?.validate() ?? false) {
+  Future<void> login() async {
+    print('Login function called');
+    if (formKey.currentState?.validate() ?? false) {
       try {
         UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(
-          email: _emailController.text,
-          password: _passwordController.text,
+          email: emailController.text,
+          password: passwordController.text,
         );
 
         DocumentSnapshot patientSnapshot = await FirebaseFirestore.instance.collection('user_patients')
@@ -87,6 +88,7 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    print('LoginPage build method called');
     return Scaffold(
       appBar: AppBar(
         title: Column(
@@ -125,13 +127,13 @@ class _LoginPageState extends State<LoginPage> {
         child: Padding(
           padding: EdgeInsets.all(16.0),
           child: Form(
-            key: _formKey,
+            key: formKey,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                _buildTextField('Email', _emailController, _validateEmail, keyboardType: TextInputType.emailAddress),
+                _buildTextField('Email', emailController, validateEmail, keyboardType: TextInputType.emailAddress),
                 SizedBox(height: 16.0),
-                _buildTextField('Password', _passwordController, _validatePassword, obscureText: true),
+                _buildTextField('Password', passwordController, validatePassword, obscureText: true),
                 SizedBox(height: 8.0),
                 GestureDetector(
                   onTap: () {
@@ -147,11 +149,14 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 SizedBox(height: 32.0),
                 ElevatedButton(
-                  onPressed: _login,
+                  onPressed: login,
                   style: ElevatedButton.styleFrom(
                     primary: Colors.white,
                     onPrimary: Colors.black,
                     padding: EdgeInsets.symmetric(horizontal: 40.0),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20.0),
+                    ),
                   ),
                   child: Text('Login'),
                 ),

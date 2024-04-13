@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'login_page.dart';
 import 'appointment_schedule_page.dart';
+import 'medication_page.dart';
+import 'my_appointments_page.dart';
+import 'schedule_remainder_page.dart'; // Import the ScheduleRemainderPage
 
 class HomePage extends StatelessWidget {
   final String patientName;
@@ -50,9 +53,17 @@ class HomePage extends StatelessWidget {
             onSelected: (value) {
               if (value == 'logout') {
                 _logout(context); // Call logout function
-              } else if (value == 'editProfile') {
-                // Navigate to the Edit Profile page
-                // You can add your navigation logic here
+              } else if (value == 'appointment') {
+                // Navigate to the MyAppointmentsPage and pass patientName and patientId
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => MyAppointmentsPage(
+                      patientName: patientName,
+                      patientId: patientId,
+                    ),
+                  ),
+                );
               }
             },
             itemBuilder: (BuildContext context) {
@@ -62,8 +73,8 @@ class HomePage extends StatelessWidget {
                   child: Text('Logout'),
                 ),
                 PopupMenuItem<String>(
-                  value: 'editProfile',
-                  child: Text('Edit Profile'),
+                  value: 'appointment',
+                  child: Text('My Appointments'),
                 ),
               ];
             },
@@ -96,7 +107,7 @@ class HomePage extends StatelessWidget {
               },
               child: Container(
                 width: 300.0,
-                height: 150.0, // Reduce the height to fit within the available space
+                height: 150.0,
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
                     colors: [Color(0xFF64A1FF), Color(0xFF8BFCFE)],
@@ -114,22 +125,76 @@ class HomePage extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(height: 20.0), // Adjust the spacing as needed
-            Container(
-              width: 300.0,
-              height: 150.0, // Reduce the height to fit within the available space
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [Color(0xFF64A1FF), Color(0xFF8BFCFE)],
+            
+            SizedBox(height: 20.0),
+
+            // Middle Container (Medication)
+            GestureDetector(
+              onTap: () {
+                // Navigate to the Medication page with patientName and patientId
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => MedicationPage(
+                      patientName: patientName,
+                      patientId: patientId,
+                    ),
+                  ),
+                );
+              },
+              child: Container(
+                width: 300.0,
+                height: 150.0,
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [Color(0xFF64A1FF), Color(0xFF8BFCFE)],
+                  ),
+                  borderRadius: BorderRadius.circular(10.0),
                 ),
-                borderRadius: BorderRadius.circular(10.0),
+                child: Center(
+                  child: Text(
+                    'MEDICATION',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 16.0,
+                    ),
+                  ),
+                ),
               ),
-              child: Center(
-                child: Text(
-                  'SCHEDULE REMAINDER',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 16.0,
+            ),
+            
+            SizedBox(height: 30.0),
+
+            // Another Container (Schedule Remainder)
+            GestureDetector(
+              onTap: () {
+                // Navigate to the Schedule Remainder page with patientName and patientId
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ScheduleRemainderPage(
+                      patientName: patientName,
+                      patientId: patientId,
+                    ),
+                  ),
+                );
+              },
+              child: Container(
+                width: 300.0,
+                height: 150.0,
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [Color(0xFF64A1FF), Color(0xFF8BFCFE)],
+                  ),
+                  borderRadius: BorderRadius.circular(10.0),
+                ),
+                child: Center(
+                  child: Text(
+                    'SCHEDULE REMAINDER',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 16.0,
+                    ),
                   ),
                 ),
               ),

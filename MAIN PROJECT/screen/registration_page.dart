@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-
+import 'login_page.dart';
 enum Gender { Male, Female, Others }
 
 class RegistrationPage extends StatefulWidget {
@@ -363,6 +363,14 @@ class _RegistrationPageState extends State<RegistrationPage> {
           _registrationMessage = uniqueId;
         });
 
+        // Navigate to LoginPage on successful registration
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => LoginPage(),
+          ),
+        );
+
         print('Registration successful. Unique ID: $uniqueId');
       } on FirebaseAuthException catch (e) {
         setState(() {
@@ -377,6 +385,13 @@ class _RegistrationPageState extends State<RegistrationPage> {
       }
     }
   }
+}
+
+void main() {
+  runApp(MaterialApp(
+    home: RegistrationPage(),
+  ));
+}
 
   Future<String> _generateUniquePatientId() async {
     QuerySnapshot querySnapshot = await FirebaseFirestore.instance.collection('patient_ids').orderBy('timestamp', descending: true).limit(1).get();
@@ -415,4 +430,4 @@ class _RegistrationPageState extends State<RegistrationPage> {
 
     return lastCaregiverId;
   }
-}
+

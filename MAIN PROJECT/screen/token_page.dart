@@ -8,11 +8,17 @@ class TokenPage extends StatefulWidget {
   final String patientName;
   final String patientId;
   final int tokenNumber;
+  final String selectedDoctorName;
+  final DateTime selectedAppointmentDate;
+  final TimeOfDay selectedAppointmentTime;
 
   TokenPage({
     required this.patientName,
     required this.patientId,
     required this.tokenNumber,
+    required this.selectedDoctorName,
+    required this.selectedAppointmentDate,
+    required this.selectedAppointmentTime,
   });
 
   @override
@@ -21,12 +27,12 @@ class TokenPage extends StatefulWidget {
 
 class _TokenPageState extends State<TokenPage> {
   String patientEmail = '';
+  bool emailSent = false; // Track whether the email has been sent
 
   @override
   void initState() {
     super.initState();
     fetchPatientEmail();
-    sendTokenNumberByEmail(); // Automatically send token number on page load
   }
 
   Future<void> fetchPatientEmail() async {
@@ -45,6 +51,14 @@ class _TokenPageState extends State<TokenPage> {
           setState(() {
             patientEmail = snapshot['email'] ?? ''; // handle null
           });
+
+          // Trigger sending the email when patientEmail is available
+          if (patientEmail.isNotEmpty && !emailSent) {
+            sendTokenNumberByEmail();
+            setState(() {
+              emailSent = true; // Set the flag to avoid sending multiple emails
+            });
+          }
         }
       }
     } catch (error) {
@@ -53,32 +67,38 @@ class _TokenPageState extends State<TokenPage> {
   }
 
   Future<void> sendTokenNumberByEmail() async {
-  final smtpServer = gmail('akhila773666@gmail.com', 'Akhila00@');
+    final smtpServer = gmail('abhinamolv2024a@mca.ajce.in', 'Ammu@1002');
 
-  final message = Message()
-    ..from = Address('akhila773666@gmail.com', 'MedTracker')
-    ..recipients.add(patientEmail)
-    ..subject = 'Token Number Notification'
-    ..text = 'Your token number is: ${widget.tokenNumber}';
+    final message = Message()
+      ..from = Address('akhilasraj20@gmail.com', 'MedTracker')
+      ..recipients.add(patientEmail)
+      ..subject = 'Token Number Notification'
+      ..text = 'Your token number is: ${widget.tokenNumber}\n'
+          'Doctor: ${widget.selectedDoctorName}\n'
+          'Appointment Date: ${widget.selectedAppointmentDate.toLocal()}\n'
+          'Appointment Time: ${widget.selectedAppointmentTime.format(context)}';
 
-  try {
-    await send(message, smtpServer);
-    print('Message sent successfully');
-  } catch (error, stackTrace) {
-    print('Error sending email: $error\n$stackTrace');
+    try {
+      await send(message, smtpServer);
+      print('Message sent successfully');
+    } catch (error, stackTrace) {
+      print('Error sending email: $error\n$stackTrace');
+    }
   }
-}
-
-
-
-
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(100.0), // Adjust the height as needed
+        preferredSize: Size.fromHeight(100.0),
         child: AppBar(
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back),
+            onPressed: () {
+              // Handle back arrow press
+              Navigator.of(context).pop();
+            },
+          ),
           flexibleSpace: Container(
             padding: EdgeInsets.only(left: 16.0, right: 16.0, top: 70.0),
             decoration: BoxDecoration(
@@ -106,6 +126,9 @@ class _TokenPageState extends State<TokenPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text('Token Number: ${widget.tokenNumber}'),
+            Text('Doctor: ${widget.selectedDoctorName}'),
+            Text('Appointment Date: ${widget.selectedAppointmentDate.toLocal()}'),
+            Text('Appointment Time: ${widget.selectedAppointmentTime.format(context)}'),
             // Add other UI components as needed
           ],
         ),
@@ -113,3 +136,4 @@ class _TokenPageState extends State<TokenPage> {
     );
   }
 }
+
