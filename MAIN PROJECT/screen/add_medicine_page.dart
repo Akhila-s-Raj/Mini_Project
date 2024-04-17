@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:timezone/data/latest.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
-import 'package:permission_handler/permission_handler.dart';
-
+import 'package:timezone/data/latest.dart' as tz;
 
 class AddMedicinePage extends StatefulWidget {
   final String patientName;
@@ -31,153 +29,79 @@ class _AddMedicinePageState extends State<AddMedicinePage> {
   FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
       FlutterLocalNotificationsPlugin();
 
-  int notificationId = 0; // Unique ID for notifications
-
   @override
-  @override
-void initState() {
-  super.initState();
-  var initializationSettingsAndroid =
-      AndroidInitializationSettings('app_icon');
-  var initializationSettings = InitializationSettings(
-      android: initializationSettingsAndroid);
-  flutterLocalNotificationsPlugin.initialize(initializationSettings);
+  void initState() {
+    super.initState();
+    _initializeNotifications();
+    _createNotificationChannel();  
+    tz.initializeTimeZones();
+  }
 
-  // Initialize timezone data
-  tz.initializeTimeZones();
+  void _initializeNotifications() {
+    var initializationSettingsAndroid =
+        AndroidInitializationSettings('@mipmap/ic_launcher');
+    var initializationSettings =
+        InitializationSettings(android: initializationSettingsAndroid);
 
+    flutterLocalNotificationsPlugin.initialize(initializationSettings);
+  }
 
-}
+  void _createNotificationChannel() {
+    var androidNotificationChannel = AndroidNotificationChannel(
+      'channel_ID',
+      'channel_name',
+      importance: Importance.max,
+      playSound: true,
+      enableVibration: true,
+    );
 
+    flutterLocalNotificationsPlugin
+        .resolvePlatformSpecificImplementation<
+            AndroidFlutterLocalNotificationsPlugin>()
+        ?.createNotificationChannel(androidNotificationChannel);
+  }
 
-void _scheduleNotifications(String medicineName, String dose) async {
-  // Request permissions
-  await _requestPermissions();
+  void _scheduleNotification(TimeOfDay time, String title, String body) async {
+  print('Scheduling notification for $time with title $title and body $body');
 
   var androidPlatformChannelSpecifics = AndroidNotificationDetails(
-    'medtracker_channel', 
-    'MedTracker Channel', 
+    'channel_ID',
+    'channel_name',
     importance: Importance.max,
     priority: Priority.high,
-    ticker: 'ticker',
+    playSound: true,
+    enableVibration: true,
+    styleInformation: BigTextStyleInformation(''),
   );
+  
   var platformChannelSpecifics = NotificationDetails(
     android: androidPlatformChannelSpecifics,
   );
 
-  String payload = '$medicineName|$dose';  // Payload containing medicineName and dose
+  // Generate a unique id that fits within the range of a 32-bit integer
+  int id = DateTime.now().millisecondsSinceEpoch % (1 << 31);
 
-  tz.TZDateTime? firstIntakeDate = _nextInstanceOfFirstIntake();
-  tz.TZDateTime? secondIntakeDate = _nextInstanceOfSecondIntake();
-  tz.TZDateTime? thirdIntakeDate = _nextInstanceOfThirdIntake();
+  DateTime now = DateTime.now();
+  DateTime scheduledDate = DateTime(
+    now.year,
+    now.month,
+    now.day,
+    time.hour,
+    time.minute,
+  );
 
-  if (selectedFrequency == 'Once daily' && firstIntakeDate != null) {
-    await flutterLocalNotificationsPlugin.zonedSchedule(
-      notificationId++,
-      'Medicine Reminder',
-      'Take $dose $selectedUnit of $medicineName now',
-      firstIntakeDate,
-      platformChannelSpecifics,
-      androidAllowWhileIdle: true,
-      uiLocalNotificationDateInterpretation: UILocalNotificationDateInterpretation.absoluteTime,
-      payload: payload,
-    );
-  } else if (selectedFrequency == 'Twice daily' && firstIntakeDate != null && secondIntakeDate != null) {
-    await flutterLocalNotificationsPlugin.zonedSchedule(
-      notificationId++,
-      'Medicine Reminder',
-      'Take $dose $selectedUnit of $medicineName now',
-      firstIntakeDate,
-      platformChannelSpecifics,
-      androidAllowWhileIdle: true,
-      uiLocalNotificationDateInterpretation: UILocalNotificationDateInterpretation.absoluteTime,
-      payload: payload,
-    );
-    await flutterLocalNotificationsPlugin.zonedSchedule(
-      notificationId++,
-      'Medicine Reminder',
-      'Take $dose $selectedUnit of $medicineName now',
-      secondIntakeDate,
-      platformChannelSpecifics,
-      androidAllowWhileIdle: true,
-      uiLocalNotificationDateInterpretation: UILocalNotificationDateInterpretation.absoluteTime,
-      payload: payload,
-    );
-  } else if (selectedFrequency == 'Thrice daily' && firstIntakeDate != null && secondIntakeDate != null && thirdIntakeDate != null) {
-    await flutterLocalNotificationsPlugin.zonedSchedule(
-      notificationId++,
-      'Medicine Reminder',
-      'Take $dose $selectedUnit of $medicineName now',
-      firstIntakeDate,
-      platformChannelSpecifics,
-      androidAllowWhileIdle: true,
-      uiLocalNotificationDateInterpretation: UILocalNotificationDateInterpretation.absoluteTime,
-      payload: payload,
-    );
-    await flutterLocalNotificationsPlugin.zonedSchedule(
-      notificationId++,
-      'Medicine Reminder',
-      'Take $dose $selectedUnit of $medicineName now',
-      secondIntakeDate,
-      platformChannelSpecifics,
-      androidAllowWhileIdle: true,
-      uiLocalNotificationDateInterpretation: UILocalNotificationDateInterpretation.absoluteTime,
-      payload: payload,
-    );
-    await flutterLocalNotificationsPlugin.zonedSchedule(
-      notificationId++,
-      'Medicine Reminder',
-      'Take $dose $selectedUnit of $medicineName now',
-      thirdIntakeDate,
-      platformChannelSpecifics,
-      androidAllowWhileIdle: true,
-      uiLocalNotificationDateInterpretation: UILocalNotificationDateInterpretation.absoluteTime,
-      payload: payload,
-    );
-  }
+  await flutterLocalNotificationsPlugin.zonedSchedule(
+    id,
+    title,
+    body,
+    tz.TZDateTime.from(scheduledDate, tz.local),
+    platformChannelSpecifics,
+    androidAllowWhileIdle: true,
+    uiLocalNotificationDateInterpretation:
+        UILocalNotificationDateInterpretation.absoluteTime,
+    matchDateTimeComponents: DateTimeComponents.time,
+  );
 }
-
-Future<void> _requestPermissions() async {
-  await Permission.notification.request();
-  await Permission.ignoreBatteryOptimizations.request();
-}
-
-tz.TZDateTime? _nextInstanceOfFirstIntake() {
-  if (firstIntake == null) return null;
-  final now = tz.TZDateTime.now(tz.local);
-  var scheduledDate = tz.TZDateTime(tz.local, now.year, now.month, now.day,
-      firstIntake!.hour, firstIntake!.minute);
-  if (scheduledDate.isBefore(now)) {
-    scheduledDate = scheduledDate.add(const Duration(days: 1));
-  }
-  return scheduledDate;
-}
-
-tz.TZDateTime? _nextInstanceOfSecondIntake() {
-  if (secondIntake == null) return null;
-  final now = tz.TZDateTime.now(tz.local);
-  var scheduledDate = tz.TZDateTime(tz.local, now.year, now.month, now.day,
-      secondIntake!.hour, secondIntake!.minute);
-  if (scheduledDate.isBefore(now)) {
-    scheduledDate = scheduledDate.add(const Duration(days: 1));
-  }
-  return scheduledDate;
-}
-
-tz.TZDateTime? _nextInstanceOfThirdIntake() {
-  if (thirdIntake == null) return null;
-  final now = tz.TZDateTime.now(tz.local);
-  var scheduledDate = tz.TZDateTime(tz.local, now.year, now.month, now.day,
-      thirdIntake!.hour, thirdIntake!.minute);
-  if (scheduledDate.isBefore(now)) {
-    scheduledDate = scheduledDate.add(const Duration(days: 1));
-  }
-  return scheduledDate;
-}
-
-Gradient buttonGradient = LinearGradient(
-  colors: [Color(0xFF64A1FF), Color(0xFF8BFCFE)],
-);
 
   @override
   Widget build(BuildContext context) {
@@ -231,7 +155,7 @@ Gradient buttonGradient = LinearGradient(
               ),
             ),
             SizedBox(height: 20),
-            Row( // Unit
+            Row(
               children: [
                 Text(
                   'Unit:',
@@ -245,8 +169,13 @@ Gradient buttonGradient = LinearGradient(
                       selectedUnit = value!;
                     });
                   },
-                  items: ['pills', 'applications', 'drops', 'millilitre', 'tablespoon']
-                      .map<DropdownMenuItem<String>>((String value) {
+                  items: [
+                    'pills',
+                    'applications',
+                    'drops',
+                    'millilitre',
+                    'tablespoon'
+                  ].map<DropdownMenuItem<String>>((String value) {
                     return DropdownMenuItem<String>(
                       value: value,
                       child: Text(value),
@@ -256,7 +185,7 @@ Gradient buttonGradient = LinearGradient(
               ],
             ),
             SizedBox(height: 20),
-            Row( // Days
+            Row(
               children: [
                 Text(
                   'Days:',
@@ -282,7 +211,7 @@ Gradient buttonGradient = LinearGradient(
             ),
             if (selectedDays == 'Every X days') ...[
               SizedBox(height: 20),
-              Row( // Interval
+              Row(
                 children: [
                   Text(
                     'Enter interval:',
@@ -304,7 +233,8 @@ Gradient buttonGradient = LinearGradient(
                         child: TextField(
                           readOnly: true,
                           textAlign: TextAlign.center,
-                          controller: TextEditingController(text: selectedInterval.toString()),
+                          controller: TextEditingController(
+                              text: selectedInterval.toString()),
                         ),
                       ),
                       IconButton(
@@ -322,7 +252,7 @@ Gradient buttonGradient = LinearGradient(
             ],
             if (selectedDays == 'Weekday') ...[
               SizedBox(height: 20),
-              Row( // Weekdays
+              Row(
                 children: [
                   Text(
                     'Weekdays:',
@@ -355,7 +285,7 @@ Gradient buttonGradient = LinearGradient(
               ),
             ],
             SizedBox(height: 20),
-            Row( // Frequency
+            Row(
               children: [
                 Text(
                   'Frequency:',
@@ -381,7 +311,7 @@ Gradient buttonGradient = LinearGradient(
             ),
             if (selectedFrequency == 'Once daily') ...[
               SizedBox(height: 20),
-              Row( // First Intake
+              Row(
                 children: [
                   Text(
                     'First Intake:',
@@ -398,8 +328,11 @@ Gradient buttonGradient = LinearGradient(
                       }
                     },
                     style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.resolveWith<Color>((Set<MaterialState> states) {
-                        return states.contains(MaterialState.pressed) ? Color(0xFF64A1FF) : Color(0xFF8BFCFE);
+                      backgroundColor: MaterialStateProperty.resolveWith<Color>(
+                          (Set<MaterialState> states) {
+                        return states.contains(MaterialState.pressed)
+                            ? Color(0xFF64A1FF)
+                            : Color(0xFF8BFCFE);
                       }),
                       overlayColor: MaterialStateProperty.all<Color>(Colors.transparent),
                       shape: MaterialStateProperty.all<OutlinedBorder>(
@@ -409,16 +342,59 @@ Gradient buttonGradient = LinearGradient(
                       ),
                     ),
                     child: Text(
-                      firstIntake != null ? 'Selected Time: ${firstIntake!.format(context)}' : 'Select Time',
+                      firstIntake != null
+                          ? 'Selected Time: ${firstIntake!.format(context)}'
+                          : 'Select Time',
                       style: TextStyle(color: Colors.white),
                     ),
                   ),
                 ],
               ),
             ],
-            if (selectedFrequency == 'Twice daily' || selectedFrequency == 'Thrice daily') ...[
+            if (selectedFrequency == 'Twice daily' ||
+                selectedFrequency == 'Thrice daily') ...[
               SizedBox(height: 20),
-              Row( // Second Intake
+              Row(
+                children: [
+                  Text(
+                    'First Intake:',
+                    style: TextStyle(fontSize: 16),
+                  ),
+                  SizedBox(width: 20),
+                  ElevatedButton(
+                    onPressed: () async {
+                      final TimeOfDay? pickedTime = await _selectTime(context);
+                      if (pickedTime != null) {
+                        setState(() {
+                          firstIntake = pickedTime;
+                        });
+                      }
+                    },
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.resolveWith<Color>(
+                          (Set<MaterialState> states) {
+                        return states.contains(MaterialState.pressed)
+                            ? Color(0xFF64A1FF)
+                            : Color(0xFF8BFCFE);
+                      }),
+                      overlayColor: MaterialStateProperty.all<Color>(Colors.transparent),
+                      shape: MaterialStateProperty.all<OutlinedBorder>(
+                        RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                      ),
+                    ),
+                    child: Text(
+                      firstIntake != null
+                          ? 'Selected Time: ${firstIntake!.format(context)}'
+                          : 'Select Time',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(height: 20),
+              Row(
                 children: [
                   Text(
                     'Second Intake:',
@@ -435,8 +411,11 @@ Gradient buttonGradient = LinearGradient(
                       }
                     },
                     style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.resolveWith<Color>((Set<MaterialState> states) {
-                        return states.contains(MaterialState.pressed) ? Color(0xFF64A1FF) : Color(0xFF8BFCFE);
+                      backgroundColor: MaterialStateProperty.resolveWith<Color>(
+                          (Set<MaterialState> states) {
+                        return states.contains(MaterialState.pressed)
+                            ? Color(0xFF64A1FF)
+                            : Color(0xFF8BFCFE);
                       }),
                       overlayColor: MaterialStateProperty.all<Color>(Colors.transparent),
                       shape: MaterialStateProperty.all<OutlinedBorder>(
@@ -446,52 +425,60 @@ Gradient buttonGradient = LinearGradient(
                       ),
                     ),
                     child: Text(
-                      secondIntake != null ? 'Selected Time: ${secondIntake!.format(context)}' : 'Select Time',
+                      secondIntake != null
+                          ? 'Selected Time: ${secondIntake!.format(context)}'
+                          : 'Select Time',
                       style: TextStyle(color: Colors.white),
                     ),
                   ),
                 ],
               ),
-            ],
-            if (selectedFrequency == 'Thrice daily') ...[
-              SizedBox(height: 20),
-              Row( // Third Intake
-                children: [
-                  Text(
-                    'Third Intake:',
-                    style: TextStyle(fontSize: 16),
-                  ),
-                  SizedBox(width: 20),
-                  ElevatedButton(
-                    onPressed: () async {
-                      final TimeOfDay? pickedTime = await _selectTime(context);
-                      if (pickedTime != null) {
-                        setState(() {
-                          thirdIntake = pickedTime;
-                        });
-                      }
-                    },
-                    style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.resolveWith<Color>((Set<MaterialState> states) {
-                        return states.contains(MaterialState.pressed) ? Color(0xFF64A1FF) : Color(0xFF8BFCFE);
-                      }),
-                      overlayColor: MaterialStateProperty.all<Color>(Colors.transparent),
-                      shape: MaterialStateProperty.all<OutlinedBorder>(
-                        RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10.0),
+              if (selectedFrequency == 'Thrice daily') ...[
+                SizedBox(height: 20),
+                Row(
+                  children: [
+                    Text(
+                      'Third Intake:',
+                      style: TextStyle(fontSize: 16),
+                    ),
+                    SizedBox(width: 20),
+                    ElevatedButton(
+                      onPressed: () async {
+                        final TimeOfDay? pickedTime = await _selectTime(context);
+                        if (pickedTime != null) {
+                          setState(() {
+                            thirdIntake = pickedTime;
+                          });
+                        }
+                      },
+                      style: ButtonStyle(
+                        backgroundColor: MaterialStateProperty.resolveWith<Color>(
+                            (Set<MaterialState> states) {
+                          return states.contains(MaterialState.pressed)
+                              ? Color(0xFF64A1FF)
+                              : Color(0xFF8BFCFE);
+                        }),
+                        overlayColor: MaterialStateProperty.all<Color>(Colors.transparent),
+                        shape: MaterialStateProperty.all<OutlinedBorder>(
+                          RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10.0),
+                          ),
                         ),
                       ),
+                      child: Text(
+                        thirdIntake != null
+                            ? 'Selected Time: ${thirdIntake!.format(context)}'
+                            : 'Select Time',
+                        style: TextStyle(color: Colors.white),
+                      ),
                     ),
-                    child: Text(
-                      thirdIntake != null ? 'Selected Time: ${thirdIntake!.format(context)}' : 'Select Time',
-                      style: TextStyle(color: Colors.white),
-                    ),
-                  ),
-                ],
-              ),
+                  ],
+                ),
+              ],
             ],
+
             SizedBox(height: 20),
-            Row( // Enter Dose
+            Row(
               children: [
                 Text(
                   'Enter Dose:',
@@ -514,13 +501,17 @@ Gradient buttonGradient = LinearGradient(
               width: double.infinity,
               child: ElevatedButton(
                 onPressed: () {
-                  _setReminder();
+                  _saveMedication();
                 },
                 style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.resolveWith<Color>((Set<MaterialState> states) {
-                    return states.contains(MaterialState.pressed) ? Color(0xFF64A1FF) : Color(0xFF8BFCFE);
+                  backgroundColor: MaterialStateProperty.resolveWith<Color>(
+                      (Set<MaterialState> states) {
+                    return states.contains(MaterialState.pressed)
+                        ? Color(0xFF64A1FF)
+                        : Color(0xFF8BFCFE);
                   }),
-                  overlayColor: MaterialStateProperty.all<Color>(Colors.transparent),
+                  overlayColor:
+                      MaterialStateProperty.all<Color>(Colors.transparent),
                   shape: MaterialStateProperty.all<OutlinedBorder>(
                     RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10.0),
@@ -530,7 +521,7 @@ Gradient buttonGradient = LinearGradient(
                 child: Padding(
                   padding: EdgeInsets.symmetric(vertical: 15),
                   child: Text(
-                    'Set Reminder',
+                    'Save Medication',
                     style: TextStyle(fontSize: 16),
                   ),
                 ),
@@ -549,20 +540,15 @@ Gradient buttonGradient = LinearGradient(
     );
   }
 
-  void _setReminder() async {
-    // Save reminder to Firestore
+  void _saveMedication() async {
     String medicineName = medicineNameController.text;
     String dose = doseController.text;
-    String reminderMessage = 'Reminder set successfully';
 
-    // Generate a new document reference for the patient
     var patientDocRef = FirebaseFirestore.instance.collection('reminder').doc(widget.patientId);
 
-    // Generate a new document reference for the medication
-    var newMedicineDocRef = patientDocRef.collection('medications').doc();
-    String medicineId = newMedicineDocRef.id; // Get the autogenerated ID
+    var newMedicineDocRef = patientDocRef.collection('reminder').doc();
+    String medicineId = newMedicineDocRef.id; 
 
-    // Store reminder details under the patient's ID with the unique medicine ID
     await newMedicineDocRef.set({
       'medicineId': medicineId,
       'medicineName': medicineName,
@@ -577,47 +563,30 @@ Gradient buttonGradient = LinearGradient(
       'thirdIntake': thirdIntake != null ? '${thirdIntake!.hour}:${thirdIntake!.minute}' : null,
     });
 
-    // Show a snackbar to indicate that reminder was set successfully
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: Text(reminderMessage),
+        content: Text('Medication saved successfully'),
         duration: Duration(seconds: 2),
       ),
     );
 
-    // Schedule notifications
-    _scheduleNotifications(medicineName, dose);
+    if (firstIntake != null) {
+      _scheduleNotification(
+          firstIntake!,
+          'Medication Reminder',
+          'Time to take your $medicineName');
+    }
+    if (secondIntake != null) {
+      _scheduleNotification(
+          secondIntake!,
+          'Medication Reminder',
+          'Time to take your $medicineName');
+    }
+    if (thirdIntake != null) {
+      _scheduleNotification(
+          thirdIntake!,
+          'Medication Reminder',
+          'Time to take your $medicineName,$dose');
+    }
   }
-  
-
- Future<void> _showNotification(int id, String title, String body, String payload) async {
-    var androidPlatformChannelSpecifics = AndroidNotificationDetails(
-      'medtracker_channel', 
-      'MedTracker Channel', 
-      importance: Importance.max,
-      priority: Priority.high,
-      ticker: 'ticker',
-    );
-
-    var platformChannelSpecifics = NotificationDetails(
-      android: androidPlatformChannelSpecifics,
-    );
-
-    await flutterLocalNotificationsPlugin.show(
-      id,
-      title,
-      body,
-      platformChannelSpecifics,
-      payload: payload,  // Set the payload here
-    );
 }
-
-
-
-
-}
-
-
-
-
-
